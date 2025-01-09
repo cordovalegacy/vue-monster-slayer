@@ -9,7 +9,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
-    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js" defer></script>
     <script src="app.js" defer></script>
   </head>
   <body>
@@ -18,26 +18,28 @@
     </header>
     <div id="game">
       <section id="monster" class="container">
-        <h2>Monster Health</h2>
+        <h2>Monster Health {{ monsterHealth }}</h2>
         <div class="healthbar">
-          <div class="healthbar__value"></div>
+          <div class="healthbar__value" :style="monsterBarStyles"></div>
         </div>
       </section>
       <section id="player" class="container">
-        <h2>Your Health</h2>
+        <h2>Your Health {{ playerHealth }}</h2>
         <div class="healthbar">
-          <div class="healthbar__value"></div>
+          <div class="healthbar__value" :style="playerBarStyles"></div>
         </div>
       </section>
       <section id="controls">
-        <button>ATTACK</button>
-        <button>SPECIAL ATTACK</button>
-        <button>HEAL</button>
-        <button>SURRENDER</button>
+        <button @click="addToBattleLog('ATTACK')">ATTACK</button>
+        <button @click="addToBattleLog('SPECIAL ATTACK')">SPECIAL ATTACK</button>
+        <button @click="addToBattleLog('HEAL')">HEAL</button>
+        <button @click="addToBattleLog('SURRENDER')">SURRENDER</button>
       </section>
       <section id="log" class="container">
         <h2>Battle Log</h2>
-        <ul></ul>
+        <ul>
+          <li v-for="log in battleLogList">{{ log }}</li>
+        </ul>
       </section>
     </div>
   </body>
